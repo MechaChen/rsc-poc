@@ -3,8 +3,8 @@ import React, { Suspense } from 'react';
 export default function Page() {
     return (
         <>
-            <h1>Hello server component!</h1>
-            <Suspense fallback="Loading...">
+            <h1 className='text-3xl mb-3'>Hello server component!</h1>
+            <Suspense fallback="Fetching albums...">
                 <Albums />
             </Suspense>
         </>
@@ -12,28 +12,53 @@ export default function Page() {
 }
 
 
-const apiGetAlbums = async () => ({
-    data: [
-        {
-            id: 1,
-            title: 'Album 1',
-            cover: 'https://via.placeholder.com/150',
-            songs: [
-                { id: 1, title: 'Song 1' },
-                { id: 2, title: 'Song 2' },
-            ],
-        },
-        {
-            id: 2,
-            title: 'Album 2',
-            cover: 'https://via.placeholder.com/150',
-            songs: [
-                { id: 1, title: 'Song 1' },
-                { id: 2, title: 'Song 2' },
-            ],
-        },
-    ],
-});
+const apiGetAlbums = () => {
+    const response = {
+        data: [
+            {
+                id: 1,
+                title: 'FEARLESS',
+                artists: 'Le Sserafim',
+                cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/21/Le_Sserafim_%E2%80%93_Fearless.png/220px-Le_Sserafim_%E2%80%93_Fearless.png',
+                songs: [
+                    { id: 1, title: 'The World Is My Oyster' },
+                    { id: 2, title: 'FEARLESS' },
+                    { id: 2, title: 'Blue Flame' },
+                    { id: 2, title: 'The Great Mermaid' },
+                    { id: 2, title: 'Sour Grapes' },
+                ],
+            },
+            {
+                id: 2,
+                title: 'Bon Voyage',
+                artists: 'Yooa',
+                cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Bon_Voyage_-_YooA.png/220px-Bon_Voyage_-_YooA.png',
+                songs: [
+                    { id: 1, title: 'Bon voyage' },
+                    { id: 2, title: 'Far' },
+                    { id: 3, title: 'Diver' },
+                    { id: 4, title: 'Abracadabra' },
+                    { id: 5, title: 'End Of Story' },
+                ],
+            },
+            {
+                id: 2,
+                title: 'HAPPENING',
+                artists: 'AKMU',
+                cover: 'https://lineimg.omusic.com.tw/img/album/3281272.jpg?v=20211004145718',
+                songs: [
+                    { id: 1, title: 'HAPPENING' },
+                ],
+            },
+        ],
+    }
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(response);
+        }, 3000);
+    });
+};
 
 async function Albums() {
     const albums = await apiGetAlbums();
@@ -41,11 +66,12 @@ async function Albums() {
     return (
         <ul>
             {albums.data.map((album) => (
-                <li key={album.id}>
-                    <img src={album.cover} alt={album.title} />
-                    <div>
-                        <h3>{album.title}</h3>
+                <li key={album.id} className='flex gap-2 items-center mb-2'>
+                    <img src={album.cover} alt={album.title} className="w-20 aspect-square" />
+                    <div className='flex flex-wrap items-center'>
+                        <h3 className='text-xl mr-3'>{album.title}</h3>
                         <p>{album.songs.length} songs</p>
+                        <p className="w-full">Artist : {album.artists}</p>
                     </div>
                 </li>
             ))}
