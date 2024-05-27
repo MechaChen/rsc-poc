@@ -3,13 +3,14 @@ import { Hono } from 'hono';
 import { build as esbuild } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 import { renderToString } from 'react-dom/server';
+import * as ReactServerDom from 'react-server-dom-webpack/server.browser'
 import { createElement } from 'react';
 
 const app = new Hono();
 app.get('/', async (c) => {
 	const Page = await import('./build/page.js');
-	const html = renderToString(createElement(Page.default));
-	return c.html(html);
+	const stream = ReactServerDom.renderToReadableStream(createElement(Page.default));
+	return new Response(stream);
 });
 
 serve(app, async (info) => {
