@@ -1,5 +1,7 @@
 import React, { Suspense } from 'react';
 
+import Like from './Like.jsx';
+
 export default function Page() {
     return (
         <>
@@ -21,11 +23,11 @@ const apiGetAlbums = () => {
                 artists: 'Le Sserafim',
                 cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/21/Le_Sserafim_%E2%80%93_Fearless.png/220px-Le_Sserafim_%E2%80%93_Fearless.png',
                 songs: [
-                    { id: 1, title: 'The World Is My Oyster' },
-                    { id: 2, title: 'FEARLESS' },
-                    { id: 2, title: 'Blue Flame' },
-                    { id: 2, title: 'The Great Mermaid' },
-                    { id: 2, title: 'Sour Grapes' },
+                    { id: 11, title: 'The World Is My Oyster' },
+                    { id: 12, title: 'FEARLESS' },
+                    { id: 13, title: 'Blue Flame' },
+                    { id: 14, title: 'The Great Mermaid' },
+                    { id: 15, title: 'Sour Grapes' },
                 ],
             },
             {
@@ -34,20 +36,20 @@ const apiGetAlbums = () => {
                 artists: 'Yooa',
                 cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Bon_Voyage_-_YooA.png/220px-Bon_Voyage_-_YooA.png',
                 songs: [
-                    { id: 1, title: 'Bon voyage' },
-                    { id: 2, title: 'Far' },
-                    { id: 3, title: 'Diver' },
-                    { id: 4, title: 'Abracadabra' },
-                    { id: 5, title: 'End Of Story' },
+                    { id: 21, title: 'Bon voyage' },
+                    { id: 21, title: 'Far' },
+                    { id: 23, title: 'Diver' },
+                    { id: 24, title: 'Abracadabra' },
+                    { id: 25, title: 'End Of Story' },
                 ],
             },
             {
-                id: 2,
+                id: 3,
                 title: 'HAPPENING',
                 artists: 'AKMU',
                 cover: 'https://lineimg.omusic.com.tw/img/album/3281272.jpg?v=20211004145718',
                 songs: [
-                    { id: 1, title: 'HAPPENING' },
+                    { id: 31, title: 'HAPPENING' },
                 ],
             },
         ],
@@ -72,6 +74,7 @@ async function Albums() {
                         <h3 className='text-xl mr-3'>{album.title}</h3>
                         <p>{album.songs.length} songs</p>
                         <p className="w-full">Artist : {album.artists}</p>
+                        <Like />
                     </div>
                 </li>
             ))}
